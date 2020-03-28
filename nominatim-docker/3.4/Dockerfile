@@ -40,6 +40,16 @@ COPY nominatim.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Load initial data
 RUN curl http://www.nominatim.org/data/country_grid.sql.gz > /app/src/data/country_osm_grid.sql.gz
+
+# -added by Alex-
+## Wikipedia rankings
+RUN curl https://www.nominatim.org/data/wikipedia_article.sql.bin > /app/src/data/wikipedia_article.sql.bin
+RUN curl https://www.nominatim.org/data/wikipedia_redirect.sql.bin > /app/src/data/wikipedia_redirect.sql.bin
+## Great Britain, USA postcodes
+RUN curl https://www.nominatim.org/data/gb_postcode_data.sql.gz > /app/src/data/gb_postcode_data.sql.gz
+RUN curl https://www.nominatim.org/data/us_postcode_data.sql.gz > /app/src/data/us_postcode_data.sql.gz
+# -end of added by Alex-
+
 RUN chmod o=rwx /app/src/build
 
 EXPOSE 5432
